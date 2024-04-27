@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "../store/featuers/cartSlice";
 function Cart() {
   const cartList = useSelector((state) => state.cart.cart);
+  const dispatch = useDispatch();
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -61,7 +63,10 @@ function Cart() {
                           />
                         </form>
 
-                        <button className="text-gray-600 transition hover:text-red-600">
+                        <button
+                          className="text-gray-600 transition hover:text-red-600"
+                          onClick={() => dispatch(removeFromCart(product))}
+                        >
                           <span className="sr-only">Remove item</span>
 
                           <svg
