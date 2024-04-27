@@ -1,7 +1,7 @@
 "use client";
-import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CartHeader } from "./cartHeader";
 
 const links = [
   {
@@ -84,7 +84,7 @@ export const Navbar = () => {
 
           <div className="flex items-center gap-4">
             <div className="sm:flex sm:gap-4">
-              <ShoppingBag className="hover:cursor-pointer" />
+              <CartHeader />
             </div>
 
             <button className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">

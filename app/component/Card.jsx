@@ -1,25 +1,30 @@
 import React from "react";
 import { ShoppingBag } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/featuers/cartSlice";
+import Link from "next/link";
 
 export const Card = ({ product }) => {
+  const dispatch = useDispatch();
   return (
-    <a href="#" className="group block">
-      <img
-        src={product?.img}
-        alt=""
-        className="h-[350px] w-full object-cover sm:h-[450px]"
-      />
+    <div className="relative">
+      <Link className="group block" href="">
+        <img
+          src={product?.img}
+          alt=""
+          className="h-[350px] w-full object-cover sm:h-[450px]"
+        />
 
-      <div className="mt-3 ">
-        <div className="flex justify-between">
-          <p className="text-md text-secondary font-semibold">
-            {product?.title}
-          </p>
-          <h3 className=" text-gray-600 font-semibold capitalize">
-            {product?.cat_prefix}
-          </h3>
-        </div>
-        {/* <div className="mt-1.5 flex gap-1">
+        <div className="mt-3 ">
+          <div className="flex justify-between">
+            <p className="text-md text-secondary font-semibold">
+              {product?.title}
+            </p>
+            <h3 className=" text-gray-600 font-semibold capitalize">
+              {product?.cat_prefix}
+            </h3>
+          </div>
+          {/* <div className="mt-1.5 flex gap-1">
           <form>
             <fieldset>
               <legend className="sr-only">Color</legend>
@@ -84,13 +89,15 @@ export const Card = ({ product }) => {
           </form>
         </div> */}
 
-        <div className="mt-5 flex justify-between items-center text-sm">
-          <p className="text-secondary font-semibold">${product?.price}</p>
-          <a className=" p-2   focus:outline-none " href="#">
-            <ShoppingBag />
-          </a>
+          <div className="mt-5 flex justify-between items-center text-sm">
+            <p className="text-secondary font-semibold">${product?.price}</p>
+          </div>
         </div>
-      </div>
-    </a>
+      </Link>
+      <ShoppingBag
+        className="cursor-pointer absolute right-0 bottom-0"
+        onClick={() => dispatch(addToCart(product))}
+      />
+    </div>
   );
 };
