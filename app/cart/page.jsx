@@ -16,7 +16,7 @@ function Cart() {
           </header>
 
           <div className="mt-8">
-            {cartList.length ? (
+            {cartList?.length ? (
               <div>
                 {cartList.map((product) => (
                   <ul className="space-y-4">
