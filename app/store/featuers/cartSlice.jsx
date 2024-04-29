@@ -10,12 +10,13 @@ const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
+      // let product = state.cart.find((item) => item.id === action.id);
       state.cart.push(action.payload);
-      // state.total += action.payload.price
+      state.total += action.payload.price;
     },
     removeFromCart: (state, action) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload.id);
-      // state.total -= action.payload.price
+      state.total -= action.payload.price;
     },
   },
 });

@@ -2,8 +2,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart } from "../store/featuers/cartSlice";
+import Image from "next/image";
+import Link from "next/link";
 function Cart() {
   const cartList = useSelector((state) => state.cart.cart);
+  const total = useSelector((state) => state.cart.total);
   const dispatch = useDispatch();
   return (
     <section>
@@ -20,13 +23,23 @@ function Cart() {
               <div>
                 {cartList.map((product) => (
                   <ul className="space-y-4">
-                    <li key={product.id} className="flex items-center gap-4">
-                      <img
-                        src={product?.img}
-                        alt=""
-                        className="size-16 rounded object-cover"
-                      />
-
+                    <li
+                      key={product.id}
+                      className="flex items-center gap-4 mb-8"
+                    >
+                      <Link
+                        href={`/product/${product.id}`}
+                        className="flex items-center gap-4"
+                      >
+                        <Image
+                          src={product?.img}
+                          alt={product?.title}
+                          className="size-16 rounded-md "
+                          width={100}
+                          height={100}
+                          objectFit="cover"
+                        />
+                      </Link>
                       <div>
                         <h3 className="text-sm text-gray-900">
                           {product?.title}
@@ -54,13 +67,9 @@ function Cart() {
                             Quantity{" "}
                           </label>
 
-                          <input
-                            type="number"
-                            min="1"
-                            value="1"
-                            id="Line1Qty"
-                            className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
-                          />
+                          <span className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none">
+                            {product.total ? product.total : 1}
+                          </span>
                         </form>
 
                         <button
@@ -93,7 +102,7 @@ function Cart() {
                     <dl className="space-y-0.5 text-sm text-gray-700">
                       <div className="flex justify-between">
                         <dt>Subtotal</dt>
-                        <dd>£250</dd>
+                        <dd>£{total ? total.substring(1) : 0}</dd>
                       </div>
 
                       <div className="flex justify-between">

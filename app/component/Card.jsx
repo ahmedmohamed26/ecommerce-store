@@ -8,7 +8,7 @@ export const Card = ({ product }) => {
   const dispatch = useDispatch();
   return (
     <div className="relative">
-      <Link className="group block" href="">
+      <Link className="group block" href={`/product/${product.id}`}>
         <img
           src={product?.img}
           alt=""
