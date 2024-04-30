@@ -26,7 +26,7 @@ export const Navbar = () => {
   return (
     <header className="bg-white py-4">
       <div className="container flex h-16">
-        <Link className="block text-teal-600" href="#">
+        <Link className="block text-teal-600" href="/">
           <svg
             id="logo-83"
             width="40"

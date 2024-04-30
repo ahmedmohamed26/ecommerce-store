@@ -19,15 +19,18 @@ export const CartHeader = () => {
       />
       {showCartList && (
         <div
-          className=" w-screen max-w-md border border-gray-600 bg-gray-100 px-4 py-8 sm:px-6 lg:px-8 absolute top-7 -right-10"
+          className=" w-screen max-w-md border border-gray-300 bg-gray-100 px-4 py-4 sm:px-6 lg:px-8 absolute top-7 -right-10"
           aria-modal="true"
           role="dialog"
           tabIndex="-1"
         >
-          <div className="mt-4 space-y-6">
+          <div className="space-y-6 ">
             {cartList.cart.length ? (
               <div>
-                <ul className="space-y-4">
+                <h2 className="flex justify-center text-2xl font-semibold text-secondary mb-4">
+                  Your Cart
+                </h2>
+                <ul className="space-y-4 overflow-auto scrollbar max-h-[300px]">
                   {cartList?.cart.map((item) => (
                     <li
                       key={item.id}
@@ -98,7 +101,7 @@ export const CartHeader = () => {
                   </a>
 
                   <button
-                    onClick={() => setShowCartList(!showCartList)}
+                    onClick={() => setShowCartList(false)}
                     className="inline-block text-sm text-secondary underline underline-offset-4 transition hover:text-gray-600"
                   >
                     Continue shopping
