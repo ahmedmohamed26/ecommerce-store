@@ -1,12 +1,12 @@
 "use client";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart } from "../store/featuers/cartSlice";
+import { Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../store/featuers/cartSlice";
 function Cart() {
   const cartList = useSelector((state) => state.cart.cart);
-  const total = useSelector((state) => state.cart.total);
+  const totalAmount = useSelector((state) => state.cart.totalAmount);
   const dispatch = useDispatch();
   return (
     <section>
@@ -61,38 +61,19 @@ function Cart() {
                       </div>
 
                       <div className="flex flex-1 items-center justify-end gap-2">
-                        <form>
-                          <label htmlFor="Line1Qty" className="sr-only">
-                            {" "}
-                            Quantity{" "}
-                          </label>
-
-                          <span className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none">
-                            {product.total ? product.total : 1}
-                          </span>
-                        </form>
-
-                        <button
-                          className="text-gray-600 transition hover:text-red-600"
+                        <Plus
+                          size={15}
+                          onClick={() => dispatch(addToCart(product))}
+                          className="text-secondary cursor-pointer"
+                        />
+                        <span className="bg-gray-200 px-2 mx-2 rounded-md flex justify-center items-center">
+                          {product.cartQuantity ? product.cartQuantity : 1}
+                        </span>
+                        <Minus
+                          size={15}
+                          className="text-secondary cursor-pointer"
                           onClick={() => dispatch(removeFromCart(product))}
-                        >
-                          <span className="sr-only">Remove item</span>
-
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="h-4 w-4"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                            />
-                          </svg>
-                        </button>
+                        />
                       </div>
                     </li>
                   </ul>
@@ -102,7 +83,7 @@ function Cart() {
                     <dl className="space-y-0.5 text-sm text-gray-700">
                       <div className="flex justify-between">
                         <dt>Subtotal</dt>
-                        <dd>£{total ? total.substring(1) : 0}</dd>
+                        <dd>£{totalAmount ? totalAmount.substring(1) : 0}</dd>
                       </div>
 
                       <div className="flex justify-between">

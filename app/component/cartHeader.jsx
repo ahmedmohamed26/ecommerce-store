@@ -1,15 +1,17 @@
-import React, { useState } from "react";
-import { ShoppingCart } from "lucide-react";
-import { useSelector } from "react-redux";
+import { Minus, Plus, ShoppingCart } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../store/featuers/cartSlice";
 
 export const CartHeader = () => {
-  const cartList = useSelector((state) => state.cart.cart);
+  const cartList = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
   const [showCartList, setShowCartList] = useState(false);
   return (
     <div className="relative">
       <span className="badge  absolute bottom-3 -right-3 rounded-full bg-primary text-white px-2 py-0.5 text-sm">
-        {cartList.length}
+        {cartList.totalQuantity}
       </span>
       <ShoppingCart
         className="hover:cursor-pointer"
@@ -17,17 +19,20 @@ export const CartHeader = () => {
       />
       {showCartList && (
         <div
-          className=" w-screen max-w-sm border border-gray-600 bg-gray-100 px-4 py-8 sm:px-6 lg:px-8 absolute top-7 -right-10"
+          className=" w-screen max-w-md border border-gray-600 bg-gray-100 px-4 py-8 sm:px-6 lg:px-8 absolute top-7 -right-10"
           aria-modal="true"
           role="dialog"
           tabIndex="-1"
         >
           <div className="mt-4 space-y-6">
-            {cartList.length ? (
+            {cartList.cart.length ? (
               <div>
                 <ul className="space-y-4">
-                  {cartList.map((item) => (
-                    <li key={item.id}>
+                  {cartList?.cart.map((item) => (
+                    <li
+                      key={item.id}
+                      className="flex justify-between items-center"
+                    >
                       <Link
                         href={`/product/${item.id}`}
                         className="flex items-center gap-4"
@@ -58,6 +63,21 @@ export const CartHeader = () => {
                           </dl>
                         </div>
                       </Link>
+                      <div className="justify-end flex items-center">
+                        <Plus
+                          size={15}
+                          onClick={() => dispatch(addToCart(item))}
+                          className="text-secondary cursor-pointer"
+                        />
+                        <span className="bg-white px-2 mx-2 rounded-md flex justify-center items-center">
+                          {item.cartQuantity}
+                        </span>
+                        <Minus
+                          size={15}
+                          className="text-secondary cursor-pointer"
+                          onClick={() => dispatch(removeFromCart(item))}
+                        />
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -66,7 +86,7 @@ export const CartHeader = () => {
                     href="/cart"
                     className="block rounded border border-gray-600 px-5 py-3 text-sm text-gray-600 transition hover:ring-1 hover:ring-gray-400"
                   >
-                    View my cart ({cartList.length})
+                    View my cart ({cartList.totalQuantity})
                   </Link>
 
                   <a
