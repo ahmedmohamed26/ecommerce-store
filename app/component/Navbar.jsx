@@ -24,7 +24,7 @@ const links = [
 export const Navbar = () => {
   const pathName = usePathname();
   return (
-    <header className="bg-white py-4 fixed w-full z-50">
+    <header className="bg-white py-4">
       <div className="container flex h-16">
         <Link className="block text-teal-600" href="#">
           <svg

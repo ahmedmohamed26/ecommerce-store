@@ -83,6 +83,7 @@ export const CartHeader = () => {
                 </ul>
                 <div className="space-y-4 text-center mt-4">
                   <Link
+                    onClick={() => setShowCartList(false)}
                     href="/cart"
                     className="block rounded border border-gray-600 px-5 py-3 text-sm text-gray-600 transition hover:ring-1 hover:ring-gray-400"
                   >
