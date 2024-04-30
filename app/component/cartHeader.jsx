@@ -19,7 +19,7 @@ export const CartHeader = () => {
       />
       {showCartList && (
         <div
-          className=" w-screen max-w-md border border-gray-300 bg-gray-100 px-4 py-4 sm:px-6 lg:px-8 absolute top-7 -right-10"
+          className=" w-screen max-w-md border bg-white border-gray-300 bg-gray-100 px-4 py-4 sm:px-6 lg:px-8 absolute top-7 -right-10"
           aria-modal="true"
           role="dialog"
           tabIndex="-1"
@@ -54,7 +54,7 @@ export const CartHeader = () => {
                           <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
                             <div>
                               <dt className="inline">Price:</dt>
-                              <dd className="inline"> ${item?.price}</dd>
+                              <dd className="inline"> EGP {item?.price}</dd>
                             </div>
 
                             <div>

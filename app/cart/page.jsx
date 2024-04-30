@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../store/featuers/cartSlice";
 function Cart() {
-  const cartList = useSelector((state) => state.cart.cart);
-  const totalAmount = useSelector((state) => state.cart.totalAmount);
+  let vat = 30;
+  const cartList = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   return (
     <section>
@@ -19,9 +19,9 @@ function Cart() {
           </header>
 
           <div className="mt-8">
-            {cartList?.length ? (
+            {cartList?.cart?.length ? (
               <div>
-                {cartList.map((product) => (
+                {cartList?.cart?.map((product) => (
                   <ul className="space-y-4">
                     <li
                       key={product.id}
@@ -48,7 +48,7 @@ function Cart() {
                         <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
                           <div>
                             <dt className="inline">Price: {""}</dt>
-                            <dd className="inline">${product?.price}</dd>
+                            <dd className="inline">EGP{product?.price}</dd>
                           </div>
 
                           <div>
@@ -83,22 +83,19 @@ function Cart() {
                     <dl className="space-y-0.5 text-sm text-gray-700">
                       <div className="flex justify-between">
                         <dt>Subtotal</dt>
-                        <dd>£{totalAmount ? totalAmount.substring(1) : 0}</dd>
+                        <dd>
+                          EGP {cartList?.totalPrice ? cartList?.totalPrice : 0}
+                        </dd>
                       </div>
 
                       <div className="flex justify-between">
                         <dt>VAT</dt>
-                        <dd>£25</dd>
-                      </div>
-
-                      <div className="flex justify-between">
-                        <dt>Discount</dt>
-                        <dd>-£20</dd>
+                        <dd>£{vat}</dd>
                       </div>
 
                       <div className="flex justify-between !text-base font-medium">
                         <dt>Total</dt>
-                        <dd>£200</dd>
+                        <dd>EGP {cartList?.totalPrice + vat}</dd>
                       </div>
                     </dl>
 
@@ -126,12 +123,9 @@ function Cart() {
                     </div>
 
                     <div className="flex justify-end">
-                      <a
-                        href="#"
-                        className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
-                      >
+                      <button className="block rounded bg-gray text-white px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600">
                         Checkout
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>

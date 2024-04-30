@@ -8,6 +8,9 @@ export const Card = ({ product }) => {
   const dispatch = useDispatch();
   return (
     <div className="relative">
+      <span className="absolute z-20  top-5 rounded-r-full bg-primary text-white px-3 py-1">
+        {product?.discount}%
+      </span>
       <Link className="group block" href={`/product/${product.id}`}>
         <img
           src={product?.img}
@@ -90,7 +93,7 @@ export const Card = ({ product }) => {
         </div> */}
 
           <div className="mt-5 flex justify-between items-center text-sm">
-            <p className="text-secondary font-semibold">${product?.price}</p>
+            <p className="text-secondary font-semibold">EGP {product?.price}</p>
           </div>
         </div>
       </Link>

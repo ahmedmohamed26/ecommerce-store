@@ -3,6 +3,8 @@ import "./globals.css";
 import { Navbar } from "./component/Navbar";
 import { Footer } from "./component/Footer";
 import { Providers } from "./store/provider";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +21,11 @@ export default function RootLayout({ children }) {
           <Navbar />
           {children}
           <Footer />
+          <ToastContainer
+            position="bottom-right"
+            autoClose={3000}
+            hideProgressBar={true}
+          />
         </Providers>
       </body>
     </html>

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CartHeader } from "./cartHeader";
+import { useSelector } from "react-redux";
 
 const links = [
   {
@@ -22,6 +23,8 @@ const links = [
   },
 ];
 export const Navbar = () => {
+  const totalPrice = useSelector((state) => state.cart.totalPrice);
+
   const pathName = usePathname();
   return (
     <header className="bg-white py-4">
@@ -83,6 +86,9 @@ export const Navbar = () => {
           </nav>
 
           <div className="flex items-center gap-4">
+            <span className="text-gray font-semibold">
+              EGP {totalPrice ? totalPrice : 0}
+            </span>
             <div className="sm:flex sm:gap-4">
               <CartHeader />
             </div>

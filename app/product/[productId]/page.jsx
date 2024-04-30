@@ -32,7 +32,13 @@ function ProductDetails() {
   return (
     <div className="container">
       <div className=" py-8 grid grid-cols-2 gap-4 lg:grid-cols-3 lg:gap-8  !items-start">
-        <div className="rounded-lg ">
+        <div className="rounded-lg relative">
+          {product?.discount && (
+            <span className="absolute z-20  top-5 rounded-r-full bg-primary text-white px-3 py-1">
+              {product?.discount}%
+            </span>
+          )}
+
           <img
             className="h-[350px] w-full object-cover"
             src={product?.img}
@@ -51,7 +57,7 @@ function ProductDetails() {
                 <dt className="inline font-bold text-lg text-secondary">
                   Category: {""}
                 </dt>
-                <dd className="inline text-lg font-medium text-primary capitalize">
+                <dd className="inline text-lg font-medium text-gray capitalize">
                   {product?.cat_prefix}
                 </dd>
               </div>
@@ -61,8 +67,8 @@ function ProductDetails() {
                 <dt className="inline font-bold text-lg text-secondary">
                   Price: {""}
                 </dt>
-                <dd className="inline text-lg font-medium text-primary">
-                  ${product?.price}
+                <dd className="inline text-lg font-medium text-gray">
+                  EGP {product?.price}
                 </dd>
               </div>
             </li>
@@ -76,6 +82,15 @@ function ProductDetails() {
           </button>
         </div>
       </div>
+      {product?.description && (
+        <div className="description">
+          <h3 className="text-secondary font-bold text-xl mb-3">Description</h3>
+          <p className="text-gray font-medium text-md ">
+            {product?.description}
+          </p>
+        </div>
+      )}
+
       <div className="most-seller mt-10">
         <CollectionProducts
           products={products.slice(0, 4)}
