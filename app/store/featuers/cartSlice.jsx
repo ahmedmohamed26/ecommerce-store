@@ -3,16 +3,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-const initialState = {
-  cart: localStorage.getItem("cartItems")
+const cart =
+  localStorage.getItem("cartItems") !== null
     ? JSON.parse(localStorage.getItem("cartItems"))
-    : [],
-  totalPrice: localStorage.getItem("totalPrice")
+    : [];
+const totalPrice =
+  localStorage.getItem("totalPrice") !== null
     ? JSON.parse(localStorage.getItem("totalPrice"))
-    : 0,
-  totalQuantity: localStorage.getItem("totalQuantity")
+    : 0;
+const totalQuantity =
+  localStorage.getItem("totalQuantity") !== null
     ? JSON.parse(localStorage.getItem("totalQuantity"))
-    : 0,
+    : 0;
+
+const initialState = {
+  cart: cart,
+  totalPrice: totalPrice,
+  totalQuantity: totalQuantity,
 };
 
 const cartSlice = createSlice({
@@ -37,7 +44,6 @@ const cartSlice = createSlice({
         state.cart.push(tempProduct);
         state.totalQuantity += 1;
         state.totalPrice += JSON.parse(action.payload.price);
-
         toast.success(`increased ${tempProduct.title} cart quantity`);
       }
       localStorage.setItem("totalPrice", JSON.stringify(state.totalPrice));
