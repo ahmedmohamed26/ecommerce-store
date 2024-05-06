@@ -61,18 +61,19 @@ function Cart() {
                       </div>
 
                       <div className="flex flex-1 items-center justify-end gap-2">
-                        <Plus
-                          size={15}
-                          onClick={() => dispatch(addToCart(product))}
-                          className="text-secondary cursor-pointer"
-                        />
-                        <span className="bg-gray-200 px-2 mx-2 rounded-md flex justify-center items-center">
-                          {product.cartQuantity ? product.cartQuantity : 1}
-                        </span>
                         <Minus
                           size={15}
                           className="text-secondary cursor-pointer"
                           onClick={() => dispatch(removeFromCart(product))}
+                        />
+
+                        <span className="bg-gray-200 px-2 mx-2 rounded-md flex justify-center items-center">
+                          {product.cartQuantity ? product.cartQuantity : 1}
+                        </span>
+                        <Plus
+                          size={15}
+                          onClick={() => dispatch(addToCart(product))}
+                          className="text-secondary cursor-pointer"
                         />
                       </div>
                     </li>

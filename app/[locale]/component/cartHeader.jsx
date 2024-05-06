@@ -1,10 +1,13 @@
+"use client";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../store/featuers/cartSlice";
+import { useTranslations } from "next-intl";
 
 export const CartHeader = () => {
+  const t = useTranslations("common");
   const cartList = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [showCartList, setShowCartList] = useState(false);
@@ -28,7 +31,7 @@ export const CartHeader = () => {
             {cartList.cart.length ? (
               <div>
                 <h2 className="flex justify-center text-2xl font-semibold text-secondary mb-4">
-                  Your Cart
+                  {t("yourCart")}
                 </h2>
                 <ul className="space-y-4 overflow-auto scrollbar max-h-[300px]">
                   {cartList?.cart.map((item) => (
@@ -67,18 +70,19 @@ export const CartHeader = () => {
                         </div>
                       </Link>
                       <div className="justify-end flex items-center">
-                        <Plus
-                          size={15}
-                          onClick={() => dispatch(addToCart(item))}
-                          className="text-secondary cursor-pointer"
-                        />
-                        <span className="bg-white px-2 mx-2 rounded-md flex justify-center items-center">
-                          {item.cartQuantity}
-                        </span>
+                        {" "}
                         <Minus
                           size={15}
                           className="text-secondary cursor-pointer"
                           onClick={() => dispatch(removeFromCart(item))}
+                        />
+                        <span className="bg-white px-2 mx-2 rounded-md flex justify-center items-center">
+                          {item.cartQuantity}
+                        </span>
+                        <Plus
+                          size={15}
+                          onClick={() => dispatch(addToCart(item))}
+                          className="text-secondary cursor-pointer"
                         />
                       </div>
                     </li>
