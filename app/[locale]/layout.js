@@ -22,7 +22,7 @@ export default function RootLayout({ children, params }) {
     notFound();
   }
   return (
-    <html lang={locale}>
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
