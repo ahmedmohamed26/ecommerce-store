@@ -2,11 +2,11 @@
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { CollectionProducts } from "@/app/component/collectionProducts";
 import { ShoppingCart } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "@/app/store/featuers/cartSlice";
 import { SkeltonProduct } from "./skelton";
+import { CollectionProducts } from "../../component/collectionProducts";
+import { addToCart } from "../../store/featuers/cartSlice";
 function ProductDetails() {
   const dispatch = useDispatch();
   const { productId } = useParams();

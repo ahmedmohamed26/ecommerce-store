@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import { Card } from "@/app/component/Card";
+import { Card } from "../../component/Card";
 
 function Products() {
   const params = useParams();
