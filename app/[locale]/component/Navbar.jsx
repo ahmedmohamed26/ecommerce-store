@@ -1,13 +1,6 @@
 "use client";
-import {
-  Link,
-  localeNames,
-  locales,
-  usePathname,
-  useRouter,
-  Locale,
-} from "../../../navigation";
 import { useSelector } from "react-redux";
+import { Link, usePathname } from "../../../navigation";
 import { CartHeader } from "./cartHeader";
 
 const links = [
@@ -32,20 +25,14 @@ const links = [
 export const Navbar = () => {
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const pathName = usePathname();
-  const router = useRouter();
 
-
-  
-  const changeLang = (language) => {
-    let dir = language == "ar" ? "rtl" : "ltr";
-    let lang = language == "ar" ? "ar" : "en";
-    document.querySelector("html").setAttribute("dir", dir);
-    document.querySelector("html").setAttribute("lang", lang);
-    router.replace(pathName,{ locale: language}, {shallow: true});
-  };
-
-
-
+  // const changeLang = (language) => {
+  //   let dir = language == "ar" ? "rtl" : "ltr";
+  //   let lang = language == "ar" ? "ar" : "en";
+  //   document.querySelector("html").setAttribute("dir", dir);
+  //   document.querySelector("html").setAttribute("lang", lang);
+  //   router.replace(pathName,{ locale: language}, {shallow: false});
+  // };
 
   return (
     <header className="bg-white py-4">
@@ -113,9 +100,14 @@ export const Navbar = () => {
             <div className="sm:flex sm:gap-4">
               <CartHeader />
             </div>
-
-            <button onClick={() => changeLang("ar")}>Ar</button>
-            <button onClick={() => changeLang("en")}>En</button>
+            <Link href={pathName} locale="ar">
+              Ar
+            </Link>
+            <Link href={pathName} locale="en">
+              En
+            </Link>
+            {/* <button onClick={() => changeLang("ar")}>Ar</button>
+            <button onClick={() => changeLang("en")}>En</button> */}
             <button className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
               <span className="sr-only">Toggle menu</span>
               <svg
