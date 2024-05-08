@@ -2,5 +2,8 @@
   "common": {
     "mostSeller": "Most Seller",
     "yourCart": "Your Cart"
+  },
+  "cart": {
+    "title": "Your Cart"
   }
 }

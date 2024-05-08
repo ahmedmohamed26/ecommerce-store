@@ -1,10 +1,10 @@
 "use client";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../store/featuers/cartSlice";
 import { useTranslations } from "next-intl";
+import {Link} from '../../../navigation';
 
 export const CartHeader = () => {
   const t = useTranslations("common");
@@ -92,6 +92,7 @@ export const CartHeader = () => {
                   <Link
                     onClick={() => setShowCartList(false)}
                     href="/cart"
+      
                     className="block rounded border border-gray-600 px-5 py-3 text-sm text-gray-600 transition hover:ring-1 hover:ring-gray-400"
                   >
                     View my cart ({cartList.totalQuantity})

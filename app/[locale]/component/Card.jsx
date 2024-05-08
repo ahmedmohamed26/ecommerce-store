@@ -2,7 +2,7 @@ import React from "react";
 import { ShoppingBag } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/featuers/cartSlice";
-import Link from "next/link";
+import {Link} from '../../../navigation';
 
 export const Card = ({ product }) => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export const Card = ({ product }) => {
       <span className="absolute z-20  top-5 rounded-r-full bg-primary text-white px-3 py-1">
         {product?.discount}%
       </span>
-      <Link className="group block" href={`/product/${product.id}`}>
+      <Link  className="group block" href={`/product/${product.id}`}>
         <img
           src={product?.img}
           alt=""

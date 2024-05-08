@@ -1,6 +1,12 @@
 "use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import {
+  Link,
+  localeNames,
+  locales,
+  usePathname,
+  useRouter,
+  Locale,
+} from "../../../navigation";
 import { useSelector } from "react-redux";
 import { CartHeader } from "./cartHeader";
 
@@ -22,16 +28,24 @@ const links = [
     href: "/contact",
   },
 ];
-const changeLang = (language) => {
-  let dir = language == "ar" ? "rtl" : "ltr";
-  let lang = language == "ar" ? "ar" : "en";
-  document.querySelector("html").setAttribute("dir", dir);
-  document.querySelector("html").setAttribute("lang", lang);
-};
 
 export const Navbar = () => {
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const pathName = usePathname();
+  const router = useRouter();
+
+
+  
+  const changeLang = (language) => {
+    let dir = language == "ar" ? "rtl" : "ltr";
+    let lang = language == "ar" ? "ar" : "en";
+    document.querySelector("html").setAttribute("dir", dir);
+    document.querySelector("html").setAttribute("lang", lang);
+    router.replace(pathName,{ locale: language}, {shallow: true});
+  };
+
+
+
 
   return (
     <header className="bg-white py-4">
@@ -100,12 +114,8 @@ export const Navbar = () => {
               <CartHeader />
             </div>
 
-            <button locale="ar" onClick={() => changeLang("ar")}>
-              Ar
-            </button>
-            <button locale="en" onClick={() => changeLang("en")}>
-              En
-            </button>
+            <button onClick={() => changeLang("ar")}>Ar</button>
+            <button onClick={() => changeLang("en")}>En</button>
             <button className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
               <span className="sr-only">Toggle menu</span>
               <svg
