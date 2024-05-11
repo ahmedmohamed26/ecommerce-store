@@ -1,7 +1,8 @@
 "use client";
 import { useSelector } from "react-redux";
-import { Link, usePathname } from "../../../navigation";
 import { CartHeader } from "./cartHeader";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const links = [
   {
@@ -100,14 +101,6 @@ export const Navbar = () => {
             <div className="sm:flex sm:gap-4">
               <CartHeader />
             </div>
-            <Link href={pathName} locale="ar">
-              Ar
-            </Link>
-            <Link href={pathName} locale="en">
-              En
-            </Link>
-            {/* <button onClick={() => changeLang("ar")}>Ar</button>
-            <button onClick={() => changeLang("en")}>En</button> */}
             <button className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
               <span className="sr-only">Toggle menu</span>
               <svg
