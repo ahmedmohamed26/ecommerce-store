@@ -125,9 +125,9 @@ function Cart() {
                     </div>
 
                     <div className="flex justify-end">
-                      <button className="block rounded bg-gray text-white px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600">
+                      <Link href="/checkout" className="block rounded bg-gray text-white px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600">
                         Checkout
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
